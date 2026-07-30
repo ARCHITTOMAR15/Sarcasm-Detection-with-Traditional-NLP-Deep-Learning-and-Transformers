@@ -956,34 +956,53 @@ def predict_lora(
     tokenizer,
     model
 ):
+    """
+    Run prediction using the DistilBERT + LoRA model.
 
-    start = time.perf_counter()
+    transformer_raw_prediction() already handles:
+    - token_type_ids removal for DistilBERT
+    - single-logit models using sigmoid
+    - two-logit models using softmax
+    """
+
+    start_time = time.perf_counter()
 
     (
-        prediction,
-        confidence,
-        probabilities
+        raw_class,
+        raw_confidence,
+        raw_probability_class_1
     ) = transformer_raw_prediction(
         text,
         tokenizer,
         model
     )
 
+    # Convert prediction to standard class ID
+    class_id = int(raw_class)
+
+    # Safety: binary classification should only return 0 or 1
+    if class_id not in [0, 1]:
+        class_id = 1 if raw_probability_class_1 >= 0.5 else 0
+
+    prediction = LABEL_MAP[class_id]
+
+    confidence = float(raw_confidence)
+
     sarcastic_probability = float(
-        probabilities[1]
+        raw_probability_class_1
     )
 
-    elapsed = (
-        time.perf_counter() - start
+    elapsed_ms = (
+        time.perf_counter() - start_time
     ) * 1000
 
     return {
-        "prediction": LABEL_MAP[prediction],
-        "class_id": prediction,
+        "class_id": class_id,
+        "prediction": prediction,
         "confidence": confidence,
         "sarcastic_probability": sarcastic_probability,
         "decision_score": None,
-        "time_ms": elapsed,
+        "time_ms": elapsed_ms
     }
 
 
