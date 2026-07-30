@@ -878,35 +878,67 @@ def transformer_raw_prediction(
         max_length=TRANSFORMER_MAX_LEN
     )
 
-    # DistilBERT does NOT use token_type_ids.
-    # Some saved tokenizers can still return this field,
-    # so remove it before passing inputs to the model.
+    # DistilBERT does not accept token_type_ids
     inputs.pop("token_type_ids", None)
 
     with torch.no_grad():
-
         outputs = model(**inputs)
+        logits = outputs.logits
+
+    # ==========================================
+    # CASE 1: Model returns ONE logit
+    # Binary classification using sigmoid
+    # ==========================================
+
+    if logits.shape[-1] == 1:
+
+        sarcastic_probability = torch.sigmoid(
+            logits.squeeze()
+        ).item()
+
+        raw_class = (
+            1
+            if sarcastic_probability >= 0.5
+            else 0
+        )
+
+        raw_confidence = (
+            sarcastic_probability
+            if raw_class == 1
+            else 1.0 - sarcastic_probability
+        )
+
+        raw_probability_class_1 = (
+            sarcastic_probability
+        )
+
+    # ==========================================
+    # CASE 2: Model returns TWO OR MORE logits
+    # Classification using softmax
+    # ==========================================
+
+    else:
 
         probabilities = torch.softmax(
-            outputs.logits,
+            logits,
             dim=-1
         )[0]
 
-    raw_class = int(
-        torch.argmax(
-            probabilities
-        ).item()
-    )
+        raw_class = int(
+            torch.argmax(
+                probabilities
+            ).item()
+        )
 
-    raw_confidence = float(
-        probabilities[
-            raw_class
-        ].item()
-    )
+        raw_confidence = float(
+            probabilities[
+                raw_class
+            ].item()
+        )
 
-    raw_probability_class_1 = float(
-        probabilities[1].item()
-    )
+        raw_probability_class_1 = float(
+            probabilities[1].item()
+        )
 
     return (
         raw_class,
