@@ -878,6 +878,11 @@ def transformer_raw_prediction(
         max_length=TRANSFORMER_MAX_LEN
     )
 
+    # DistilBERT does NOT use token_type_ids.
+    # Some saved tokenizers can still return this field,
+    # so remove it before passing inputs to the model.
+    inputs.pop("token_type_ids", None)
+
     with torch.no_grad():
 
         outputs = model(**inputs)
@@ -887,18 +892,26 @@ def transformer_raw_prediction(
             dim=-1
         )[0]
 
-    predicted_id = int(
-        torch.argmax(probabilities).item()
+    raw_class = int(
+        torch.argmax(
+            probabilities
+        ).item()
     )
 
-    confidence = float(
-        probabilities[predicted_id].item()
+    raw_confidence = float(
+        probabilities[
+            raw_class
+        ].item()
+    )
+
+    raw_probability_class_1 = float(
+        probabilities[1].item()
     )
 
     return (
-        predicted_id,
-        confidence,
-        probabilities.cpu().numpy()
+        raw_class,
+        raw_confidence,
+        raw_probability_class_1
     )
 
 
