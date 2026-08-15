@@ -2,12 +2,12 @@
 
 An end-to-end **NLP sarcasm detection project** comparing Traditional Machine Learning, Deep Learning, Transformer-based models, and **LoRA/PEFT** for parameter-efficient fine-tuning.
 
-🚀 **[Live Streamlit Demo](https://sarcasm-detection-with-traditional-nlp-deep-learning-and-trans.streamlit.app/)**  
-📂 **[GitHub Repository](https://github.com/ARCHITTOMAR15/Sarcasm-Detection-using-Tradational-NLP-Deep-Learning-Transformer-Models-LoRA-PEFT-)**
+ **[Live Streamlit Demo](https://sarcasm-detection-with-traditional-nlp-deep-learning-and-trans.streamlit.app/)**  
+ **[GitHub Repository](https://github.com/ARCHITTOMAR15/Sarcasm-Detection-using-Tradational-NLP-Deep-Learning-Transformer-Models-LoRA-PEFT-)**
 
 ---
 
-## ⭐ Key Results
+##  Key Results
 
 | Model | Approach | Accuracy | F1 Score | Trainable Parameters |
 |---|---|---:|---:|---:|
@@ -15,7 +15,7 @@ An end-to-end **NLP sarcasm detection project** comparing Traditional Machine Le
 | Tuned Bi-LSTM | Deep Learning | **85.95%** | — | — |
 | Frozen DistilBERT | Transformer | **81.69%** | **80.17%** | Classifier Head |
 | **DistilBERT + LoRA** | **PEFT** | **85.93%** | **85.13%** | **739,586 (1.09%)** |
-| ⭐ Pre-fine-tuned Model* | Transformer | **94.00%** | **93.52%** | **0** |
+|  Pre-fine-tuned Model* | Transformer | **94.00%** | **93.52%** | **0** |
 
 > *The 94% model is an externally pre-fine-tuned sarcasm classifier evaluated on the project test set; it was **not trained from scratch in this project**.
 
@@ -24,12 +24,12 @@ An end-to-end **NLP sarcasm detection project** comparing Traditional Machine Le
 | Model | Accuracy | Precision | Recall | F1 |
 |---|---:|---:|---:|---:|
 | Frozen DistilBERT + Classifier | 81.69% | 82.68% | 77.80% | 80.17% |
-| ⭐ Pre-fine-tuned Model | **94.00%** | **96.18%** | **91.00%** | **93.52%** |
+| Pre-fine-tuned Model | **94.00%** | **96.18%** | **91.00%** | **93.52%** |
 | DistilBERT + LoRA | 85.93% | 85.61% | 84.66% | 85.13% |
 
 ---
 
-## 🧠 What This Project Covers
+##  What This Project Covers
 
 ```text
                  Sarcasm Detection
@@ -77,7 +77,7 @@ An end-to-end **NLP sarcasm detection project** comparing Traditional Machine Le
 
 ---
 
-## 📊 Dataset
+##  Dataset
 
 **Sarcasm Headlines Dataset v2**
 
@@ -92,7 +92,7 @@ Duplicate headlines were handled during preprocessing.
 
 ---
 
-## 🔬 Best Project Results
+##  Best Project Results
 
 ### Traditional NLP
 **Tuned TF-IDF + Linear SVM**
@@ -120,11 +120,11 @@ This demonstrates **parameter-efficient adaptation of a pretrained Transformer**
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 **Python** · **Pandas** · **NumPy** · **NLTK** · **Scikit-learn** · **XGBoost** · **TensorFlow/Keras** · **PyTorch** · **Hugging Face Transformers** · **PEFT/LoRA** · **Jupyter** · **Google Colab** · **Streamlit** · **Git/GitHub**
 
-## 🎯 Project Goal
+##  Project Goal
 
 The goal is to compare **different generations of NLP techniques** and understand the trade-offs between:
 
@@ -134,7 +134,7 @@ The project progresses from classical NLP to modern **Transformer and parameter-
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **Archit Tomar**
 
