@@ -124,46 +124,6 @@ This demonstrates **parameter-efficient adaptation of a pretrained Transformer**
 
 **Python** · **Pandas** · **NumPy** · **NLTK** · **Scikit-learn** · **XGBoost** · **TensorFlow/Keras** · **PyTorch** · **Hugging Face Transformers** · **PEFT/LoRA** · **Jupyter** · **Google Colab** · **Streamlit** · **Git/GitHub**
 
----
-
-## 📁 Project Structure
-
-```text
-Sarcasm-Detection/
-│
-├── notebooks/
-│   ├── sarcsas_prediction_ml.ipynb
-│   ├── Sarcsam_NLP_DEEP_LEARNING.ipynb
-│   └── SARCSAM_DETECTION_USING_TRANSFORMER_MODELS.ipynb
-│
-├── results/
-│
-├── app/
-│
-├── requirements.txt
-├── .gitignore
-└── README.md
-```
-
----
-
-## 🚀 Run Locally
-
-```bash
-git clone <repository-url>
-cd Sarcasm-Detection
-
-pip install -r requirements.txt
-
-streamlit run app.py
-```
-
-Or try the deployed application:
-
-**[Launch Streamlit Demo](https://sarcasm-detection-with-traditional-nlp-deep-learning-and-trans.streamlit.app/)**
-
----
-
 ## 🎯 Project Goal
 
 The goal is to compare **different generations of NLP techniques** and understand the trade-offs between:
